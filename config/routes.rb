@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   root to: 'sonda#initialize'
 
-  get 'sonda/init', to: 'sonda#initialize'
+  get 'sonda/start', to: 'sonda#start'
   put 'sonda/move', to: 'sonda#move'
-  get 'sonda/current', to: 'sonda#current'
+  get 'sonda/current', to: 'sonda#currentpos'
 end

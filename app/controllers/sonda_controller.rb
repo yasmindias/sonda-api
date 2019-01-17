@@ -1,33 +1,33 @@
 class SondaController < ApplicationController
+    before_action :create_sonda, only: [:move, :currentpos]
+
     $WIDTH = 5.freeze
     $HEIGTH = 5.freeze
-    
-    def initialize
-        create 
+    $DIRECTIONS = {"C":0, "D":1, "B":2, "E":3}.freeze
 
-        @sonda['x'] = 0
-        @sonda['y'] = 0
-        @sonda['direction'] = 'D'
-
+    def start
+        create_sonda
         render json: @sonda, status: :ok
     end
 
     def move
-        @sonda['x'] = 0
-        @sonda['y'] = 0
-
+        service = SondaService.new(@sonda, params[:movimentos])
+        @sonda = service.parse_move_array
         render json: @sonda, status: :ok
     end
 
     def currentpos
-
+        render json: @sonda, status: :ok
     end
 
     private 
 
-    def create
+    def create_sonda
         if @sonda.nil?
-            @sonda = {}
+            @sonda = Hash.new
+            @sonda['x'] = 0 
+            @sonda['y'] = 0
+            @sonda['direction'] = 1
         end
     end
 end
