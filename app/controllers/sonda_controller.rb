@@ -2,7 +2,7 @@ class SondaController < ApplicationController
     before_action :create_sonda, only: [:move, :currentpos]
 
     $WIDTH = 5.freeze
-    $HEIGTH = 5.freeze
+    $HEIGHT = 5.freeze
     $DIRECTIONS = {"C":0, "D":1, "B":2, "E":3}.freeze
 
     def start
@@ -11,9 +11,14 @@ class SondaController < ApplicationController
     end
 
     def move
-        service = SondaService.new(@sonda, params[:movimentos])
-        @sonda = service.parse_move_array
-        render json: @sonda, status: :ok
+        begin 
+            service = SondaService.new(@sonda, sonda_params)
+            @sonda = service.parse_move_array
+        rescue => exception
+            render json: {"error":exception.to_s}, status: :unprocessable_entity
+        else
+            render json: @sonda, status: :ok
+        end
     end
 
     def currentpos
@@ -29,5 +34,9 @@ class SondaController < ApplicationController
             @sonda['y'] = 0
             @sonda['direction'] = 1
         end
+    end
+
+    def sonda_params
+        params.require(:movimentos)
     end
 end
