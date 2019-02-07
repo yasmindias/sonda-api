@@ -5,7 +5,7 @@ class SondaService
     end
 
     def parse_move_array
-        @move_array.each do |el.upcase!|
+        @move_array.each do |el|
             if el == "GE"
                 rotate_left
             elsif el == "GD"
@@ -46,22 +46,34 @@ class SondaService
     end
 
     def move_up
-        raise "Can't go up, out of bounds!" if @sonda['y']+1 > $HEIGHT
-        @sonda['y'] += 1
+        if @sonda['y']+1 > $HEIGHT 
+            raise "Can't go up, out of bounds!" 
+        else 
+            @sonda['y'] += 1
+        end
     end
 
     def move_right
-        raise "Can't go right, out of bounds!" if @sonda['x']+1 > $WIDTH
-        @sonda['x'] += 1
+        if @sonda['x']+1 > $WIDTH
+            raise "Can't go right, out of bounds!" 
+        else
+            @sonda['x'] += 1
+        end
     end
     
     def move_down
-        raise "Can't go down, out of bounds!" if @sonda['y']-1 <= 0
-        @sonda['y'] -= 1
+        if @sonda['y']-1 <= 0
+            raise "Can't go down, out of bounds!" 
+        else
+            @sonda['y'] -= 1
+        end
     end
     
     def move_left
-        raise "Can't go left, out of bounds!" if @sonda['x']-1 <= 0
-        @sonda['x'] -= 1
+        if @sonda['x']-1 <= 0
+            raise "Can't go left, out of bounds!" 
+        else
+            @sonda['x'] -= 1
+        end
     end
 end
