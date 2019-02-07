@@ -76,4 +76,8 @@ class SondaService
             @sonda['x'] -= 1
         end
     end
+
+    def getSonda
+        @sonda
+    end
 end
