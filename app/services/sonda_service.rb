@@ -18,62 +18,62 @@ class SondaService
     end
 
     def rotate_left
-        if @sonda['direction'] == 0
-            @sonda['direction'] = 3
+        if @sonda[:direction] <= $DIRECTIONS[:U]
+            @sonda[:direction] = $DIRECTIONS[:L]
         else
-            @sonda['direction'] -= 1
+            @sonda[:direction] -= 1
         end
     end
 
     def rotate_right
-        if @sonda['direction'] == 3
-            @sonda['direction'] = 0
+        if @sonda[:direction] >= $DIRECTIONS[:L]
+            @sonda[:direction] = $DIRECTIONS[:U]
         else
-            @sonda['direction'] += 1
+            @sonda[:direction] += 1
         end
     end
 
     def move_sonda
-        if @sonda['direction'] == 0 #C
+        if @sonda[:direction] == $DIRECTIONS[:U]
             move_up
-        elsif @sonda['direction'] == 1 #D
+        elsif @sonda[:direction] == $DIRECTIONS[:R]
             move_right
-        elsif @sonda['direction'] == 2 #B
+        elsif @sonda[:direction] == $DIRECTIONS[:D]
             move_down
-        elsif @sonda['direction'] == 3 #E
+        elsif @sonda[:direction] == $DIRECTIONS[:L]
             move_left
         end
     end
 
     def move_up
-        if @sonda['y']+1 > $HEIGHT 
-            raise "Can't go up, out of bounds!" 
+        if @sonda[:y]+1 > $HEIGHT 
+            raise StandardError, "Can't go up, out of bounds!" 
         else 
-            @sonda['y'] += 1
+            @sonda[:y] += 1
         end
     end
 
     def move_right
-        if @sonda['x']+1 > $WIDTH
-            raise "Can't go right, out of bounds!" 
+        if @sonda[:x]+1 > $WIDTH
+            raise StandardError, "Can't go right, out of bounds!" 
         else
-            @sonda['x'] += 1
+            @sonda[:x] += 1
         end
     end
     
     def move_down
-        if @sonda['y']-1 <= 0
-            raise "Can't go down, out of bounds!" 
+        if @sonda[:y]-1 <= 0
+            raise StandardError, "Can't go down, out of bounds!" 
         else
-            @sonda['y'] -= 1
+            @sonda[:y] -= 1
         end
     end
     
     def move_left
-        if @sonda['x']-1 <= 0
-            raise "Can't go left, out of bounds!" 
+        if @sonda[:x]-1 <= 0
+            raise StandardError, "Can't go left, out of bounds!" 
         else
-            @sonda['x'] -= 1
+            @sonda[:x] -= 1
         end
     end
 

@@ -3,13 +3,13 @@ class SondaController < ApplicationController
 
     $WIDTH = 5.freeze
     $HEIGHT = 5.freeze
-    $DIRECTIONS = {"C":0, "D":1, "B":2, "E":3}.freeze
+    $DIRECTIONS = {"U":0, "R":1, "D":2, "L":3}.freeze
 
     def start
         $sonda = Hash.new
-        $sonda['x'] = 0 
-        $sonda['y'] = 0
-        $sonda['direction'] = 1
+        $sonda[:x] = 1
+        $sonda[:y] = 1
+        $sonda[:direction] = $DIRECTIONS[:R]
 
         render json: $sonda, status: :ok
     end
@@ -19,7 +19,7 @@ class SondaController < ApplicationController
             service = SondaService.new($sonda, sonda_params)
             $sonda = service.parse_move_array
         rescue => exception
-            render json: {"error":exception.to_s}, status: :unprocessable_entity
+            render json: {"code": Rack::Utils::SYMBOL_TO_STATUS_CODE[:forbidden], "error":exception.to_s}, status: :forbidden
         else
             render json: $sonda, status: :ok
         end
@@ -34,9 +34,9 @@ class SondaController < ApplicationController
     def create_sonda
         if $sonda.nil?
             $sonda = Hash.new
-            $sonda['x'] = 0 
-            $sonda['y'] = 0
-            $sonda['direction'] = 1
+            $sonda[:x] = 1
+            $sonda[:y] = 1
+            $sonda[:direction] = $DIRECTIONS[:R]
         end
     end
 
