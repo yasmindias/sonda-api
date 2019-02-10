@@ -1,5 +1,4 @@
 require 'test_helper'
-require 'sonda_controller'
 
 class SondaControllerTest < ActionDispatch::IntegrationTest
     test "create sonda from request" do
