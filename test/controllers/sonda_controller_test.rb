@@ -1,6 +1,13 @@
 require 'test_helper'
 
 class SondaControllerTest < ActionDispatch::IntegrationTest
+    def setup
+        $sonda = Hash.new
+        $sonda[:x] = 1
+        $sonda[:y] = 1
+        $sonda[:direction] = 1
+    end
+
     test "create sonda from request" do
         get "/sonda/start"
 
@@ -38,5 +45,8 @@ class SondaControllerTest < ActionDispatch::IntegrationTest
         response = JSON.parse(@response.body)
 
         assert_response :success
+        assert_equal 1, response["x"]
+        assert_equal 1, response["y"]
+        assert_equal 1, response["direction"]
     end
 end
