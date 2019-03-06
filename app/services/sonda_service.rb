@@ -6,9 +6,9 @@ class SondaService
 
     def parse_move_array
         @move_array.each do |el|
-            if el == "GE"
+            if el == "TL"
                 rotate_left
-            elsif el == "GD"
+            elsif el == "TR"
                 rotate_right
             else 
                 move_sonda
