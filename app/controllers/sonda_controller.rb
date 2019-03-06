@@ -41,6 +41,6 @@ class SondaController < ApplicationController
     end
 
     def sonda_params
-        params.require(:movimentos)
+        params.require(:movements)
     end
 end

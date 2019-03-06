@@ -20,7 +20,7 @@ class SondaControllerTest < ActionDispatch::IntegrationTest
     end
 
     test "move sonda" do
-        post "/sonda/move", params: { movimentos: ["M", "M", "GE", "M"] }
+        post "/sonda/move", params: { movements: ["M", "M", "GE", "M"] }
 
         response = JSON.parse(@response.body)
 
@@ -31,7 +31,7 @@ class SondaControllerTest < ActionDispatch::IntegrationTest
     end
 
     test "don't move sonda" do
-        post "/sonda/move", params: { movimentos: ["GD", "M"] }
+        post "/sonda/move", params: { movements: ["GD", "M"] }
 
         response = JSON.parse(@response.body)
 
