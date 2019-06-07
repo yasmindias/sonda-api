@@ -1,9 +1,9 @@
 # Sonda
 Implementation of an API with a visual representation.
 
-##Setup
+## Setup
 
-####Run on Docker
+#### Run on Docker
 
 1. Run ``` docker build -t sonda . ``` to build the docker image. 
 (Don't forget to add the dot ( . ) after the command).
@@ -13,7 +13,7 @@ Implementation of an API with a visual representation.
 To access the API send requests to ``` http://localhost:8080 ```. 
 To access the visual side access ``` other link. ``` 
 
-####Run on local machine
+#### Run on local machine
 
 1. Run ``` bundle install ``` to install all necessary gems 
 2. Run ``` rails server ``` to start server
@@ -26,9 +26,9 @@ To access the visual side access ``` other link. ```
 - If you're running on Docker use the command ``` docker run -p 8080:3000 sonda rake test ```.
 - If you're running on a local machine run ```rake test``` on your terminal
 
-##Requests
+## Requests
 
-####GET /start
+#### GET /start
 This endpoint _always_ sets the sonda to the initial position (1,1) and returns the current position and direction.
 
 **Response**
@@ -40,7 +40,7 @@ This endpoint _always_ sets the sonda to the initial position (1,1) and returns 
 }
 ```
 
-####POST /move
+#### POST /move
 The request body must have an array of strings with any sort of combination of the valid movements: 
 **TL**: Turn Left, **TR**: Turn Right, **M**: Move.
 
@@ -64,7 +64,7 @@ The array used in the example will move the sonda from (1,1) to (3,2).
 }
 ```
 
-####GET /current
+#### GET /current
 Returns the current position and direction of the sonda.
 
 **Response**
